@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Mía Béo</title>
+    <title>Profile Mía Béo😼</title>
     <style>
         /* ----- CÀI ĐẶT GIAO DIỆN CƠ BẢN ----- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background-color: #000;
             background-image: 
@@ -20,328 +15,175 @@
                 radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
             background-size: 550px 550px, 350px 350px, 250px 250px;
             animation: starsFlying 20s linear infinite;
-            
             color: #fff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             height: 100vh;
             overflow: hidden; 
             position: relative; 
         }
-
         @keyframes starsFlying {
             0% { background-position: 0 0, 40px 60px, 130px 270px; }
             100% { background-position: -550px 0, -310px 60px, -120px 270px; }
         }
-
         .wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative; width: 100%; height: 100%; display: flex;
+            justify-content: center; align-items: center;
         }
 
-        /* ----- QUẢN LÝ CÁC MÀN HÌNH ----- */
+        /* ----- QUẢN LÝ MÀN HÌNH ----- */
         .screen {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
-            width: 100%; 
+            position: absolute; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); width: 100%; 
         }
+        .screen.active { opacity: 1; transform: scale(1) translateY(0); visibility: visible; pointer-events: auto; }
+        .screen.hidden { opacity: 0; transform: scale(0.9) translateY(20px); visibility: hidden; pointer-events: none; }
 
-        .screen.active {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            visibility: visible;
-            pointer-events: auto;
-        }
-
-        .screen.hidden {
-            opacity: 0;
-            transform: scale(0.9) translateY(20px);
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        /* ----- CSS CHO AVATAR ----- */
+        /* ----- AVATAR VÀ TYPING ----- */
         .avatar {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 4px solid #fff; 
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); 
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 160px; height: 160px; border-radius: 50%; object-fit: cover; 
+            border: 4px solid #fff; box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); 
+            margin-bottom: 20px; transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        .avatar:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(255, 255, 255, 0.8); }
+        .small-avatar { width: 120px; height: 120px; margin-bottom: 20px; }
+        
+        #typing-title-container { font-size: 3.5rem; margin-bottom: 30px; text-shadow: 0 0 15px rgba(255, 255, 255, 0.6); letter-spacing: 2px; min-height: 1.2em; padding: 0 15px; }
+        #typing-title::after { content: '|'; animation: blink 0.8s infinite; margin-left: 5px; font-weight: normal; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        h2 { font-size: 2.5rem; margin-bottom: 20px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); padding: 0 15px; }
 
-        .avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 35px rgba(255, 255, 255, 0.8);
-        }
-
-        .small-avatar {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 20px;
-        }
-
-        /* ----- HIỆU ỨNG GÕ CHỮ ----- */
-        #typing-title-container {
-            font-size: 3.5rem;
-            margin-bottom: 30px;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-            letter-spacing: 2px;
-            min-height: 1.2em; 
-            padding: 0 15px; 
-        }
-
-        #typing-title::after {
-            content: '|';
-            animation: blink 0.8s infinite;
-            margin-left: 5px;
-            font-weight: normal;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            padding: 0 15px;
-        }
-
-        /* ----- CÁC NÚT BẤM CHUNG ----- */
+        /* ----- NÚT BẤM ----- */
         .btn {
-            background-color: rgba(0, 0, 0, 0.5); 
-            color: #fff;
-            border: 2px solid #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            outline: none;
-            backdrop-filter: blur(5px); 
+            background-color: rgba(0, 0, 0, 0.5); color: #fff; border: 2px solid #fff; font-size: 1.2rem;
+            font-weight: bold; cursor: pointer; transition: all 0.3s ease; outline: none; backdrop-filter: blur(5px); 
+        }
+        .btn:hover { background-color: #fff; color: #000; box-shadow: 0 0 20px rgba(255, 255, 255, 0.9); transform: translateY(-3px); }
+        #start-btn { padding: 15px 50px; border-radius: 50px; }
+        #menu-screen { width: 320px; max-width: 90vw; gap: 20px; }
+        .menu-btn { padding: 18px; border-radius: 15px; width: 100%; }
+        #back-btn { position: absolute; top: 30px; left: 30px; padding: 10px 20px; border-radius: 10px; font-size: 1rem; z-index: 20; transition: all 0.5s ease; }
+        #back-btn.hidden { opacity: 0; transform: translateX(-20px); visibility: hidden; pointer-events: none; }
+
+        /* ----- MƯA ẢNH ----- */
+        .rain-cat {
+            position: fixed; top: -100px; border-radius: 10px; object-fit: cover;
+            border: 2px solid #fff; z-index: 10; pointer-events: none; animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translateY(120vh) rotate(360deg); } }
+
+        /* ----- MINIGAME CHẢI LÔNG ----- */
+        .game-box {
+            position: relative; width: 320px; max-width: 90vw; height: 420px;
+            border-radius: 15px; border: 4px solid #fff; box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+            overflow: hidden; background-color: rgba(255,255,255,0.1); 
+            touch-action: none; 
+            cursor: pointer; 
+        }
+        
+        .game-box img#game-cat-img {
+            width: 100%; height: 100%; object-fit: cover; pointer-events: none; 
+            /* Xóa transition transform mặc định để code JS hoặc Animation xử lý hoàn toàn */
         }
 
-        .btn:hover {
-            background-color: #fff;
-            color: #000;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-            transform: translateY(-3px); 
+        /* --- HIỆU ỨNG ĐIỆN ẢNH KHI THUA (ZOOM VÀ ĐEN DẦN) --- */
+        .zoom-dark-effect {
+            animation: zoomDark 2s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+        }
+        @keyframes zoomDark {
+            0% { transform: scale(1); filter: brightness(1); }
+            100% { transform: scale(3.5); filter: brightness(0); }
+        }
+        
+        .score-display {
+            position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.7);
+            padding: 8px 15px; border-radius: 10px; border: 1px solid #fff;
+            font-size: 1.2rem; font-weight: bold; z-index: 5; pointer-events: none;
         }
 
-        #start-btn {
-            padding: 15px 50px;
-            border-radius: 50px;
+        #custom-brush {
+            position: absolute; width: 70px; height: 70px; pointer-events: none;
+            z-index: 10; transform: translate(10px, 10px); 
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.8));
+            transition: opacity 0.15s ease;
         }
-
-        #menu-screen {
-            width: 320px;
-            max-width: 90vw; 
-            gap: 20px;
-        }
-
-        .menu-btn {
-            padding: 18px;
-            border-radius: 15px;
-            width: 100%;
-        }
-
-        #back-btn {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 1rem;
-            z-index: 10; 
-            transition: all 0.5s ease;
-        }
-
-        #back-btn.hidden {
+        #custom-brush.hidden {
             opacity: 0;
-            transform: translateX(-20px);
+            visibility: hidden;
+        }
+
+        /* Giao diện Overlay dùng chung cho Start và Game Over */
+        .game-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85); display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 20; backdrop-filter: blur(3px);
+            padding: 0 20px;
+            transition: opacity 0.5s ease, visibility 0.5s ease; /* Tăng thời gian mờ dần cho mượt */
+        }
+        .game-overlay.hidden {
+            opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
-        /* ----- DANH SÁCH THÔNG TIN ----- */
-        .info-list {
-            list-style: none;
-            background: rgba(255, 255, 255, 0.1); 
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 25px 20px;
-            text-align: left;
-            width: 450px;
-            max-width: 90vw; 
-            backdrop-filter: blur(8px);
+        .game-overlay h3 { color: #fff; font-size: 2rem; text-shadow: 0 0 10px #fff; margin-bottom: 15px; }
+        .game-overlay p { font-size: 1.1rem; margin-bottom: 25px; line-height: 1.4; color: #ddd; }
+        
+        /* Riêng cho chữ Game Over */
+        #game-over-screen h3 { color: #ff4d4d; text-shadow: 0 0 15px red; animation: shake 0.5s infinite; }
+        
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            25% { transform: translate(-1px, -2px) rotate(-1deg); }
+            50% { transform: translate(-3px, 0px) rotate(1deg); }
+            75% { transform: translate(3px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -1px) rotate(0deg); }
         }
 
-        .info-list li {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            line-height: 1.5;
-            padding-left: 30px;
-            position: relative;
-            opacity: 0;
-            transform: translateY(-20px);
-        }
+        /* ----- DANH SÁCH THÔNG TIN & SLIDESHOW ----- */
+        .info-list { list-style: none; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 15px; padding: 25px 20px; text-align: left; width: 450px; max-width: 90vw; backdrop-filter: blur(8px); }
+        .info-list li { font-size: 1.1rem; margin-bottom: 15px; line-height: 1.5; padding-left: 30px; position: relative; opacity: 0; transform: translateY(-20px); }
+        .info-list li::before { content: "🐾"; position: absolute; left: 0; top: 1px; font-size: 1rem; }
+        .info-list li:last-child { margin-bottom: 0; }
+        .screen.active .info-list li { animation: fadeInDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: var(--delay); }
+        @keyframes fadeInDown { to { opacity: 1; transform: translateY(0); } }
+        
+        .gallery-container { display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .gallery-img-box { width: 320px; max-width: 90vw; height: 420px; border-radius: 15px; border: 4px solid #fff; box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); overflow: hidden; background-color: rgba(255,255,255,0.1); }
+        .gallery-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-controls { display: flex; align-items: center; justify-content: center; gap: 25px; margin-top: 20px; }
+        .nav-btn { background-color: rgba(0, 0, 0, 0.6); color: #fff; border: 2px solid #fff; width: 50px; height: 50px; border-radius: 50%; font-size: 1.2rem; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px); }
+        .nav-btn:hover { background-color: #fff; color: #000; box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); transform: scale(1.1); }
+        .img-counter { font-size: 1.2rem; letter-spacing: 2px; opacity: 0.8; min-width: 70px; text-align: center; }
 
-        .info-list li::before {
-            content: "🐾"; 
-            position: absolute;
-            left: 0;
-            top: 1px;
-            font-size: 1rem;
-        }
-
-        .info-list li:last-child {
-            margin-bottom: 0;
-        }
-
-        .screen.active .info-list li {
-            animation: fadeInDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            animation-delay: var(--delay); 
-        }
-
-        @keyframes fadeInDown {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ----- CSS CHO SLIDESHOW ẢNH ----- */
-        .gallery-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        .gallery-img-box {
-            width: 320px;
-            max-width: 90vw; /* Tự co lại nếu màn hình quá nhỏ */
-            height: 420px;
-            border-radius: 15px;
-            border: 4px solid #fff;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-            overflow: hidden;
-            background-color: rgba(255,255,255,0.1);
-        }
-
-        .gallery-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Khung chứa các nút điều khiển bên dưới ảnh */
-        .gallery-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 25px; /* Khoảng cách giữa nút và số */
-            margin-top: 20px;
-        }
-
-        .nav-btn {
-            background-color: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            border: 2px solid #fff;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .nav-btn:hover {
-            background-color: #fff;
-            color: #000;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-            transform: scale(1.1);
-        }
-
-        .img-counter {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            opacity: 0.8;
-            min-width: 70px; /* Đảm bảo số không bị giật khung khi đổi từ 9 sang 10 */
-            text-align: center;
-        }
-
-        /* ----- RESPONSIVE CHO ĐIỆN THOẠI ----- */
         @media (max-width: 600px) {
-            #typing-title-container {
-                font-size: 2.2rem; 
-            }
-            h2 {
-                font-size: 1.8rem;
-            }
-            .avatar {
-                width: 130px;
-                height: 130px;
-            }
-            .small-avatar {
-                width: 100px;
-                height: 100px;
-            }
-            #menu-screen {
-                width: 85vw;
-            }
-            .menu-btn {
-                padding: 15px;
-                font-size: 1.1rem;
-            }
-            .info-list {
-                padding: 20px 15px;
-            }
-            .info-list li {
-                font-size: 1rem;
-            }
-            
-            /* Điều chỉnh lại chiều cao ảnh trên màn hình nhỏ để vừa cả bộ điều khiển */
-            .gallery-img-box {
-                height: 380px;
-            }
-            .nav-btn {
-                width: 45px;
-                height: 45px;
-            }
-            
-            #back-btn {
-                top: 15px;
-                left: 15px;
-                padding: 8px 15px;
-                font-size: 0.9rem;
-            }
+            #typing-title-container { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .avatar { width: 130px; height: 130px; }
+            .small-avatar { width: 100px; height: 100px; }
+            #menu-screen { width: 85vw; }
+            .menu-btn { padding: 15px; font-size: 1.1rem; }
+            .info-list { padding: 20px 15px; }
+            .info-list li { font-size: 1rem; }
+            .gallery-img-box, .game-box { height: 380px; }
+            .nav-btn { width: 45px; height: 45px; }
+            #back-btn { top: 15px; left: 15px; padding: 8px 15px; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NÚT QUAY LẠI -->
+    <!-- KHU VỰC PRELOAD ẢNH -->
+    <div style="display: none;">
+        <img src="images/nghingo.png" alt="preload">
+        <img src="images/khelua.png" alt="preload">
+        <img src="images/luoc.jpg" alt="preload">
+    </div>
+
     <button class="btn hidden" id="back-btn">&#8592; Quay lại</button>
 
     <div class="wrapper">
-        <!-- 1. MÀN HÌNH CHÍNH (LANDING) -->
+        <!-- 1. MÀN HÌNH CHÍNH -->
         <div class="screen active" id="landing-screen">
             <img src="images/avt.jpg" alt="Mía Béo" class="avatar">
             <h1 id="typing-title-container"><span id="typing-title"></span></h1>
@@ -351,15 +193,16 @@
         <!-- 2. MÀN HÌNH MENU -->
         <div class="screen hidden" id="menu-screen">
             <img src="images/avt.jpg" alt="Mía Béo" class="avatar small-avatar">
-            <button class="btn menu-btn" id="btn-info">Thông Tin Mía Béo</button>
+            <button class="btn menu-btn" id="btn-info">Thông Tin Mía Béo😹</button>
             <button class="btn menu-btn" id="btn-gallery">Ảnh Mía Béo</button>
-            <button class="btn menu-btn" id="btn-sticker">Sticker Mía Béo</button>
+            <button class="btn menu-btn" id="btn-rain">Mưa Ảnh Mía</button>
+            <button class="btn menu-btn" id="btn-game">MiniGame Mía</button>
         </div>
 
         <!-- 3. MÀN HÌNH THÔNG TIN -->
         <div class="screen hidden" id="info-screen">
             <img src="images/avt.jpg" alt="Mía Béo" class="avatar small-avatar">
-            <h2>Hồ Sơ Trích Ngang</h2>
+            <h2>Bí Mật Của Mía</h2>
             <ul class="info-list">
                 <li style="--delay: 0.1s">Màu trắng nhưng ở bửn</li>
                 <li style="--delay: 0.2s">Nặng 5 cân rưỡi</li>
@@ -374,12 +217,9 @@
         <div class="screen hidden" id="gallery-screen">
             <h2>Ảnh Của Béo</h2>
             <div class="gallery-container">
-                <!-- Khung chứa ảnh -->
                 <div class="gallery-img-box">
-                    <img id="current-gallery-img" src="images/img1.jpg" alt="Mía Béo Photo">
+                    <img id="current-gallery-img" src="images/img1.jpg" alt="Mía Béo">
                 </div>
-                
-                <!-- Bảng điều khiển chứa 2 nút và số đếm (Đã chuyển xuống dưới) -->
                 <div class="gallery-controls">
                     <button class="nav-btn" id="prev-btn">&#10094;</button> 
                     <div class="img-counter" id="img-counter">1 / 10</div>
@@ -387,14 +227,41 @@
                 </div>
             </div>
         </div>
+        
+        <!-- 5. MÀN HÌNH MINIGAME -->
+        <div class="screen hidden" id="game-screen">
+            <h2>Chải Lông Cho Mía😻</h2>
+            <div class="game-box" id="game-box-container">
+                <div class="score-display">Điểm: <span id="game-score">0</span></div>
+                
+                <!-- Ảnh mèo nằm đây -->
+                <img id="game-cat-img" src="images/img1.jpg" alt="Mía Béo">
+                
+                <!-- Cái lược chải -->
+                <img id="custom-brush" src="images/luoc.jpg" alt="Lược" class="hidden">
+                
+                <!-- Overlay Nút Start -->
+                <div class="game-overlay" id="start-game-screen">
+                    <h3>SẴN SÀNG?</h3>
+                    <p style="text-align: center;">Giữ và di chuyển lược để chải.<br><b>DỪNG LẠI</b> ngay khi mở to mắt!</p>
+                    <button class="btn" id="btn-start-play">BẮT ĐẦU CHƠI</button>
+                </div>
+
+                <!-- Overlay Game Over -->
+                <div class="game-overlay hidden" id="game-over-screen">
+                    <h3>GAME OVER!</h3>
+                    <p>Tổng kết điểm: <b id="final-score" style="color:#fff; font-size: 1.5rem">0</b></p>
+                    <button class="btn" id="btn-replay">Chơi Lại</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // --- LOGIC HIỆU ỨNG GÕ CHỮ ---
+        // --- HIỆU ỨNG GÕ CHỮ ---
         const titleText = "Profile Mía Béo";
         const titleElement = document.getElementById('typing-title');
         let typeIndex = 0;
-
         function typeWriter() {
             if (typeIndex < titleText.length) {
                 titleElement.innerHTML += titleText.charAt(typeIndex);
@@ -404,12 +271,13 @@
         }
         typeWriter();
 
-        // --- LOGIC CHUYỂN MÀN HÌNH ---
+        // --- CHUYỂN MÀN HÌNH ---
         const screens = {
             landing: document.getElementById('landing-screen'),
             menu: document.getElementById('menu-screen'),
             info: document.getElementById('info-screen'),
-            gallery: document.getElementById('gallery-screen')
+            gallery: document.getElementById('gallery-screen'),
+            game: document.getElementById('game-screen')
         };
         const backBtn = document.getElementById('back-btn');
         let currentScreen = 'landing';
@@ -417,32 +285,32 @@
         function switchScreen(targetScreen) {
             screens[currentScreen].classList.remove('active');
             screens[currentScreen].classList.add('hidden');
-            
             screens[targetScreen].classList.remove('hidden');
             screens[targetScreen].classList.add('active');
-            
             currentScreen = targetScreen;
-            
-            if (currentScreen === 'landing') {
-                backBtn.classList.add('hidden');
-            } else {
-                backBtn.classList.remove('hidden');
-            }
+            if (currentScreen === 'landing') backBtn.classList.add('hidden');
+            else backBtn.classList.remove('hidden');
         }
 
         document.getElementById('start-btn').addEventListener('click', () => switchScreen('menu'));
         document.getElementById('btn-info').addEventListener('click', () => switchScreen('info'));
         document.getElementById('btn-gallery').addEventListener('click', () => switchScreen('gallery'));
+        
+        document.getElementById('btn-game').addEventListener('click', () => { 
+            resetGame(); 
+            switchScreen('game'); 
+        });
 
         backBtn.addEventListener('click', () => {
-            if (currentScreen === 'info' || currentScreen === 'gallery') {
+            if (currentScreen === 'info' || currentScreen === 'gallery' || currentScreen === 'game') {
+                if (currentScreen === 'game') stopAllTimers();
                 switchScreen('menu'); 
             } else if (currentScreen === 'menu') {
                 switchScreen('landing'); 
             }
         });
 
-        // --- LOGIC SLIDESHOW ẢNH ---
+        // --- SLIDESHOW ẢNH ---
         let currentImgIndex = 1;
         const totalImages = 10;
         const galleryImgElement = document.getElementById('current-gallery-img');
@@ -452,22 +320,215 @@
             galleryImgElement.src = `images/img${currentImgIndex}.jpg`;
             counterElement.innerText = `${currentImgIndex} / ${totalImages}`;
         }
-
         document.getElementById('prev-btn').addEventListener('click', () => {
-            currentImgIndex--;
-            if (currentImgIndex < 1) {
-                currentImgIndex = totalImages; 
-            }
+            currentImgIndex = currentImgIndex > 1 ? currentImgIndex - 1 : totalImages;
+            updateGalleryUI();
+        });
+        document.getElementById('next-btn').addEventListener('click', () => {
+            currentImgIndex = currentImgIndex < totalImages ? currentImgIndex + 1 : 1;
             updateGalleryUI();
         });
 
-        document.getElementById('next-btn').addEventListener('click', () => {
-            currentImgIndex++;
-            if (currentImgIndex > totalImages) {
-                currentImgIndex = 1; 
-            }
-            updateGalleryUI();
+        // --- MƯA ẢNH MÍA ---
+        document.getElementById('btn-rain').addEventListener('click', () => {
+            let rainTime = 0;
+            const maxTime = 3000; 
+            const intervalTime = 120; 
+            
+            const rainInterval = setInterval(() => {
+                const rainImg = document.createElement('img');
+                const randomNum = Math.floor(Math.random() * 10) + 1;
+                rainImg.src = `images/img${randomNum}.jpg`; 
+                rainImg.className = 'rain-cat';
+                
+                const size = Math.random() * 40 + 40;
+                rainImg.style.width = size + 'px';
+                rainImg.style.height = size + 'px';
+                rainImg.style.left = Math.random() * 95 + 'vw';
+                rainImg.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
+                
+                document.body.appendChild(rainImg);
+                setTimeout(() => rainImg.remove(), 3500);
+                
+                rainTime += intervalTime;
+                if (rainTime >= maxTime) clearInterval(rainInterval);
+            }, intervalTime);
         });
+
+        // --- STATE MACHINE CHO MINIGAME ---
+        let gameState = 'WAITING_START'; 
+        let score = 0;
+        let isDragging = false;
+        
+        let loopTimeout = null;
+        let scoreInterval = null;
+        let gameOverTimeout = null; // Timer chờ zoom xong mới hiện bảng Game Over
+
+        const gameBox = document.getElementById('game-box-container');
+        const catImg = document.getElementById('game-cat-img');
+        const scoreUI = document.getElementById('game-score');
+        const brush = document.getElementById('custom-brush');
+        
+        const startGameScreen = document.getElementById('start-game-screen');
+        const gameOverScreen = document.getElementById('game-over-screen');
+        const btnStartPlay = document.getElementById('btn-start-play');
+        const btnReplay = document.getElementById('btn-replay');
+
+        function stopAllTimers() {
+            clearTimeout(loopTimeout);
+            clearInterval(scoreInterval);
+            clearTimeout(gameOverTimeout);
+        }
+
+        function resetGame() {
+            stopAllTimers();
+            gameState = 'WAITING_START';
+            score = 0;
+            isDragging = false;
+            
+            scoreUI.innerText = score;
+            catImg.src = 'images/img1.jpg';
+            catImg.classList.remove('zoom-dark-effect'); // Khôi phục ảnh về bình thường
+            catImg.style.transform = 'translate(0, 0) scale(1)'; // Đảm bảo reset scale
+            
+            brush.classList.add('hidden');
+            gameOverScreen.classList.add('hidden');
+            startGameScreen.classList.remove('hidden'); 
+        }
+
+        function startGameSession() {
+            startGameScreen.classList.add('hidden');
+            gameState = 'NORMAL';
+            
+            scoreInterval = setInterval(() => {
+                if (isDragging && gameState === 'NORMAL') {
+                    score += 1;
+                    scoreUI.innerText = score;
+                }
+            }, 500);
+
+            scheduleNextEvent();
+        }
+
+        function scheduleNextEvent() {
+            if (gameState === 'GAMEOVER' || gameState === 'WAITING_START') return;
+            const delay = Math.random() * 2500 + 2500;
+            loopTimeout = setTimeout(triggerWarning, delay);
+        }
+
+        function triggerWarning() {
+            if (gameState === 'GAMEOVER' || gameState === 'WAITING_START') return;
+            gameState = 'WARNING';
+            catImg.src = 'images/nghingo.png';
+            loopTimeout = setTimeout(triggerNghingo, 600);
+        }
+
+        function triggerNghingo() {
+            if (gameState === 'GAMEOVER' || gameState === 'WAITING_START') return;
+            gameState = 'NGHINGO';
+
+            if (isDragging) {
+                loseGame();
+                return;
+            }
+
+            loopTimeout = setTimeout(revertToNormal, 2000);
+        }
+
+        function revertToNormal() {
+            if (gameState === 'GAMEOVER' || gameState === 'WAITING_START') return;
+            gameState = 'NORMAL';
+            catImg.src = 'images/img1.jpg';
+            scheduleNextEvent(); 
+        }
+
+        function loseGame() {
+            gameState = 'GAMEOVER';
+            isDragging = false;
+            brush.classList.add('hidden');
+            stopAllTimers();
+            
+            catImg.src = 'images/khelua.png';
+            catImg.classList.add('zoom-dark-effect'); // Kích hoạt CSS Animation phóng to và đen đi
+            
+            document.getElementById('final-score').innerText = score;
+            
+            // Đợi 2 giây cho hiệu ứng Zoom & Đen hoàn tất rồi mới làm bảng Game Over rõ dần lên
+            gameOverTimeout = setTimeout(() => {
+                gameOverScreen.classList.remove('hidden');
+            }, 2000);
+        }
+
+        // --- XỬ LÝ CỬ CHỈ CHUỘT VÀ TAY ---
+        function updateBrushPosition(e) {
+            // PointerEvent cung cấp trực tiếp clientX, clientY cho cả chạm màn hình và chuột
+            const rect = gameBox.getBoundingClientRect();
+            brush.style.left = (e.clientX - rect.left) + 'px';
+            brush.style.top = (e.clientY - rect.top) + 'px';
+        }
+
+        function handlePointerDown(e) {
+            if (gameState === 'GAMEOVER' || gameState === 'WAITING_START') return;
+            
+            if (gameState === 'NGHINGO') {
+                loseGame();
+                return;
+            }
+
+            isDragging = true;
+            // BƯỚC QUAN TRỌNG CHỮA LỖI LƯỢC BAY:
+            // 1. Phải di chuyển lược đến đúng tọa độ tay/chuột TRƯỚC
+            updateBrushPosition(e);
+            // 2. Rồi mới gỡ class hidden ra để nó hiện lên ngay tại chỗ đó
+            brush.classList.remove('hidden');
+        }
+
+        function handlePointerMove(e) {
+            if (!isDragging || gameState === 'GAMEOVER' || gameState === 'WAITING_START') return;
+            updateBrushPosition(e);
+
+            if (gameState === 'NGHINGO') {
+                loseGame();
+                return;
+            }
+
+            // Hiệu ứng giật giật tạo cảm giác "đã ngứa"
+            const shakeX = (Math.random() - 0.5) * 6; 
+            const shakeY = (Math.random() - 0.5) * 6; 
+            catImg.style.transform = `translate(${shakeX}px, ${shakeY}px) scale(1.02)`;
+            setTimeout(() => {
+                if (gameState !== 'GAMEOVER' && gameState !== 'WAITING_START') {
+                    catImg.style.transform = 'translate(0, 0) scale(1)';
+                }
+            }, 100);
+        }
+
+        function handlePointerUp() {
+            isDragging = false;
+            brush.classList.add('hidden');
+        }
+
+        // Dùng pointer events để thống nhất xử lý cả Desktop và Mobile cực mượt
+        gameBox.addEventListener('pointerdown', handlePointerDown);
+        gameBox.addEventListener('pointermove', handlePointerMove);
+        gameBox.addEventListener('pointerup', handlePointerUp);
+        gameBox.addEventListener('pointerleave', handlePointerUp);
+        gameBox.addEventListener('pointercancel', handlePointerUp);
+
+        // Các sự kiện Nút Overlay
+        btnStartPlay.addEventListener('pointerdown', (e) => e.stopPropagation());
+        btnStartPlay.addEventListener('click', (e) => {
+            e.stopPropagation();
+            startGameSession();
+        });
+
+        btnReplay.addEventListener('pointerdown', (e) => e.stopPropagation());
+        btnReplay.addEventListener('click', (e) => {
+            e.stopPropagation();
+            resetGame();
+            startGameSession(); // Ấn chơi lại thì vào thẳng game luôn, không cần qua bảng Start nữa
+        });
+
     </script>
 
 </body>
